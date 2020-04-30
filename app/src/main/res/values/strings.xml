@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Jail poker</string>
+    <string name="rules_string">Rules</string>
+    <string name="play_string">Play</string>
+    <string name="rules_title_string">The rules of the \n Jail Poker</string>
+    <string name="rules_text_string">
+        There are two players in this game, Even and Odd.
+        Each player can show either one or two fingers.
+        If the sum of the fingers shown is even, Even gets that sum.
+        Otherwise, if the sum is odd, Odd gets it.
+        The first one to get 100 points wins.
+        You are playing for the Even.
+        To play the game, press the button with the number of fingers you want to show as soon as the countdown is finished.
+        Your total score is displayed on top, the history of your and CPU\'s scores are displayed on left and right respectively.
+        Good luck!
+    </string>
+    <string name="ok_string" translatable="false">OK</string>
+
+    <string name="wait_string">Wait till the count down ends</string>
+    <string name="continue_string">Continue</string>
+    <string name="lost_string">You lost\nPress to return to the main menu</string>
+    <string name="won_string">Wohoo, you won!\nPress to return to the main menu</string>
+
+</resources>
