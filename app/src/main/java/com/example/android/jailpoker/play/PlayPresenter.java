@@ -29,7 +29,9 @@ public class PlayPresenter {
         this.countDownTime = countDownTime;
         this.playView = playView;
     }
-
+    public void viewIsReady() {
+        playRound();
+    }
     private final int maxDelay = 300;
     private int countDownTime;
     private boolean clicked;
@@ -79,7 +81,12 @@ public class PlayPresenter {
         if (java.lang.Math.abs(score()) >= maxScore) {
             onGameEnd();
         }
-        playView.continuePlaying(PlayPresenter.this);
+        round.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                playView.continuePlaying();
+            }
+        }, countDownTime);
     }
 
     public final View.OnClickListener onButtonPressed = new View.OnClickListener() {
@@ -131,16 +138,16 @@ public class PlayPresenter {
         roundEnded = false;
         clicked = false;
         playView.displayCountDown();
-
-        playView.setCPUImage(getMove() == 1 ? R.drawable.one_finger : R.drawable.two_fingers);
+        CPU = getMove();
+        playView.setCPUImage(CPU == 1 ? R.drawable.one_finger : R.drawable.two_fingers);
         round.postDelayed(onRoundEnd, countDownTime * 3);
     }
 
+    // This is the only function that has irrelevant logic, but it's not worth creating a model for it
     int getMove() {
         int n = random.nextInt(12);
         if (n < 5)
             return 2;
         else return 1;
     }
-
 }

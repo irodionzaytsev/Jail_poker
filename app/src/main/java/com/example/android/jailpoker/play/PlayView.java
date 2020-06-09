@@ -21,6 +21,17 @@ import com.example.android.jailpoker.R;
 import static java.lang.System.currentTimeMillis;
 
 public class PlayView extends AppCompatActivity {
+
+    private PlayPresenter playPresenter;
+    private final int countDownTime = 500;
+    private Animation fade;
+    private TextView textView;
+    private ImageView CPUImageview;
+    private ImageView humanImageview;
+    private int countDownDigit;
+    private Handler round;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +48,9 @@ public class PlayView extends AppCompatActivity {
         playPresenter = new PlayPresenter(this, round, countDownTime);
         one.setOnClickListener(playPresenter.onButtonPressed);
         two.setOnClickListener(playPresenter.onButtonPressed);
-        playPresenter.playRound();
+        playPresenter.viewIsReady();
 
     }
-    private PlayPresenter playPresenter;
-    private final int countDownTime = 500;
-    private Animation fade;
-    private TextView textView;
-    private ImageView CPUImageview;
-    private ImageView humanImageview;
-    private int countDownDigit;
-    private Handler round;
 
     private final Runnable countDown = new Runnable() {
         @Override
@@ -96,17 +99,16 @@ public class PlayView extends AppCompatActivity {
         ((TextView) findViewById(R.id.total_score)).setText(Integer.toString(scoreTotal));
         humanImageview.startAnimation(fade);
         CPUImageview.startAnimation(fade);
-
     }
 
-    public void continuePlaying(final PlayPresenter playPresenter) {
+    public void continuePlaying() {
         humanImageview.setVisibility(View.GONE);
         CPUImageview.setImageResource(R.drawable.ic_continue);
 
         CPUImageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playPresenter.playRound();
+                playPresenter.viewIsReady();
             }
         });
 
